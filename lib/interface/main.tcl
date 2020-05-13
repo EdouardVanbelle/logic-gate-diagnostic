@@ -2,6 +2,8 @@
 # Chargement des différents fichiers
 # -------------------------------------------------------
 
+package require Tk 8.0
+
 #variable définie par prolog sinon on la définie pour les tests
 if {([info exist interface] == 0)} {
    set interface .
