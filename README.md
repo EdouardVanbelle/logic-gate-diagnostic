@@ -1,5 +1,7 @@
 
 
+a logic gate (and gate, or gate, ...) tester written in prolog
+
 
 # requirements: 
 
