@@ -1,0 +1,39 @@
+cir [
+  gate [ name: u18, type: or, in: [d, su5, su6, su7], out: [sega] ],
+  gate [ name: u19, type: or, in: [su10, su13, su5, su6], out: [segd] ],
+  gate [ name: u20, type: or, in: [d, su10, su12, su5], out: [segg] ],
+  gate [ name: u21, type: or, in: [nc, su8, su9], out: [segb] ],
+  gate [ name: u22, type: or, in: [su10, su6], out: [sege] ],
+  gate [ name: u23, type: nand, in: [nd, su15, su16, su17], out: [segf] ],
+  gate [ name: u10, type: and, in: [a, nb], out: [su10] ],
+  gate [ name: u12, type: and, in: [c, nb], out: [su12] ],
+  gate [ name: u13, type: and, in: [a, c, nb], out: [su13] ],
+  gate [ name: u14, type: nand, in: [b, na, nc], out: [segc] ],
+  gate [ name: u15, type: nand, in: [na, nb], out: [su15] ],
+  gate [ name: u16, type: nand, in: [c, nb], out: [su16] ],
+  gate [ name: u17, type: nand, in: [c, na], out: [su17] ],
+  gate [ name: u5, type: and, in: [b, nc], out: [su5] ],
+  gate [ name: u9, type: and, in: [na, nb], out: [su9] ],
+  gate [ name: u1, type: not, in: [a], out: [na] ],
+  gate [ name: u2, type: not, in: [b], out: [nb] ],
+  gate [ name: u7, type: and, in: [a, c], out: [su7] ],
+  gate [ name: u8, type: and, in: [a, b], out: [su8] ],
+  gate [ name: u3, type: not, in: [c], out: [nc] ],
+  gate [ name: u4, type: not, in: [d], out: [nd] ],
+  gate [ name: u6, type: and, in: [na, nc], out: [su6] ]
+].
+input [
+  a=0,
+  b=0,
+  c=0,
+  d=0
+].
+output [
+  sega=1,
+  segb=1,
+  segc=1,
+  segd=1,
+  sege=1,
+  segf=1,
+  segg=0
+].

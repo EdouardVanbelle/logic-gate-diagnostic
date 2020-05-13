@@ -1,0 +1,16 @@
+cir [
+  gate [ name: et, type: and, in: [a, b, c, d, e, f], out: [s1] ],
+  gate [ name: comp, type: xnor, in: [s1, g], out: [out] ]
+].
+input [
+  a=1,
+  b=1,
+  c=1,
+  d=1,
+  e=1,
+  f=1,
+  g=0
+].
+output [
+  out=1
+].

@@ -1,0 +1,17 @@
+cir [
+  gate [ name: et1, type: or, in: [a, b], out: [s_et1] ],
+  gate [ name: comp, type: or, in: [c, s_or2], out: [y] ],
+  gate [ name: et3, type: and, in: [a, b], out: [s_et3] ],
+  gate [ name: et2, type: and, in: [a, b, c], out: [s_et2] ],
+  gate [ name: or2, type: and, in: [s_et2, s_et3], out: [s_or2] ],
+  gate [ name: or1, type: or, in: [s_et1, s_et2], out: [x] ]
+].
+input [
+  a=1,
+  b=1,
+  c=1
+].
+output [
+  x=1,
+  y=1
+].

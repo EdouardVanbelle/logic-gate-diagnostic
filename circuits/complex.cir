@@ -1,0 +1,25 @@
+cir [
+  gate [ name: u1, type: not, in: [a], out: [na] ],
+  gate [ name: u2, type: not, in: [b], out: [nb] ],
+  gate [ name: u3, type: not, in: [c], out: [nc] ],
+  %gate [ name: u4, type: not, in: [d], out: [nd] ],
+  gate [ name: u5, type: and, in: [nc, b], out: [su5] ],
+  gate [ name: u6, type: and, in: [na, nc], out: [su6] ],
+  gate [ name: u7, type: and, in: [a, c], out: [su7] ],
+  gate [ name: u18, type: or, in: [su5, su6, su7, d], out: [seg_a] ],
+  gate [ name: u8, type: and, in: [a, b], out: [su8] ],
+  gate [ name: u9, type: and, in: [na, nb], out: [su9] ],
+  gate [ name: u21, type: or, in: [su8, su9, nc], out: [seg_b] ],
+  gate [ name: u14, type: nand, in: [na, b, nc], out: [seg_c] ]
+].
+input [
+  a=0,
+  b=0,
+  c=0,
+  d=0
+].
+output [
+  seg_a=0,
+  seg_b=0,
+  seg_c=1
+].
