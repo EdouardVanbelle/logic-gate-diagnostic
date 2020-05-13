@@ -1,12 +1,12 @@
 # -----------------------------------------------------------------------
-# Définition de la fenêtre principale
+# DÃ©finition de la fenÃªtre principale
 # -----------------------------------------------------------------------
 
 
-#attributs de la fenêtre principale
+#attributs de la fenÃªtre principale
    set titre "Diagnostic"
    wm title . $titre
-   #ainsi quand on ferme la fenêtre, on ferme aussi PROLOG
+   #ainsi quand on ferme la fenÃªtre, on ferme aussi PROLOG
    wm protocol . WM_DELETE_WINDOW { quitter } 
 
 #chargement des images
@@ -16,7 +16,7 @@
    image create photo dart_right_end -file "$interface/icons/dart_right_end.gif"
 
 # -----------------------------------------------------------------------
-# Définition du menu
+# DÃ©finition du menu
 # -----------------------------------------------------------------------
 menu .menu -tearoff 0
 
@@ -70,7 +70,7 @@ menu $m -tearoff 0
 
 
 # -----------------------------------------------------------------------
-# Définition des boutons du haut
+# DÃ©finition des boutons du haut
 # -----------------------------------------------------------------------
 frame .boutons
    button .boutons.obs      -text "Observations"  -height 1           -command { obs  } 
@@ -86,7 +86,7 @@ frame .boutons
 
 
 # -----------------------------------------------------------------------
-# Définition des boutons de gauche
+# DÃ©finition des boutons de gauche
 # -----------------------------------------------------------------------
 #Ajout des boutons pour placer des portes
 frame .gate
@@ -98,7 +98,7 @@ frame .gate
    button .gate.boutonXnor -text "Xnor"  -width 4 -command {EnterGate "" xnor "" "" "" ""}	 
    button .gate.boutonNot  -text "Not" 	 -width 4 -command {EnterGate ""  not "" "" "" ""}	 
 
-   button .gate.boutonInput -text "Entrées"  -width 4 -command {EnterIn }	 
+   button .gate.boutonInput -text "EntrÃ©es"  -width 4 -command {EnterIn }	 
    button .gate.boutonOut -text "Sorties"    -width 4 -command {EnterOut }	 
       
 
@@ -113,16 +113,16 @@ frame .gate
 
 
 # -----------------------------------------------------------------------
-# Définition de la barre de status
+# DÃ©finition de la barre de status
 # -----------------------------------------------------------------------
 frame .statebar
-   label .statebar.text -text " Attention: aucune vérification n'est effectuée,\
-ni les saisies de valeurs, ni la validité des routes" -justify left
+   label .statebar.text -text " Attention: aucune vÃ©rification n'est effectuÃ©e,\
+ni les saisies de valeurs, ni la validitÃ© des routes" -justify left
    pack .statebar.text -side left -fill x 
 
 
 # -----------------------------------------------------------------------
-# Définition du plan de travail
+# DÃ©finition du plan de travail
 # -----------------------------------------------------------------------
 frame .frame
 set c .frame.c
@@ -144,7 +144,7 @@ grid columnconfig   .frame 0 -weight 1 -minsize 0
 
 
 # -----------------------------------------------------------------------
-# Dessine l'écran
+# Dessine l'Ã©cran
 # -----------------------------------------------------------------------
 . configure -menu .menu
 pack  .boutons  -side top     -fill x
@@ -156,11 +156,11 @@ pack  .frame    -side top     -fill both -expand yes
 
 
 # -----------------------------------------------------------------------
-# Définition du popup
+# DÃ©finition du popup
 # -----------------------------------------------------------------------
 menu  .menupopup -tearoff 0
-.menupopup add command -label "Propriétés" -command { edit }
-.menupopup add command -label "Infos position" -command { debug "Coordonnées: [GetPos [current_object]]"}
+.menupopup add command -label "PropriÃ©tÃ©s" -command { edit }
+.menupopup add command -label "Infos position" -command { debug "CoordonnÃ©es: [GetPos [current_object]]"}
 .menupopup add separator
 .menupopup add command -label "Supprimer"  -command { delete_object  }
 
@@ -169,7 +169,7 @@ menu  .menupopup -tearoff 0
 
 
 # -----------------------------------------------------------------------
-# Fonction qui gère la barre de status
+# Fonction qui gÃ¨re la barre de status
 # -----------------------------------------------------------------------
 proc statusbar { text } {
    .statebar.text configure -text $text
@@ -177,10 +177,10 @@ proc statusbar { text } {
 
 
 # -----------------------------------------------------------------------
-# Fonctions qui gèrent l'état des boutons de navigation
+# Fonctions qui gÃ¨rent l'Ã©tat des boutons de navigation
 # -----------------------------------------------------------------------
 proc disable_navig {} {
-   # désactivation des boutons
+   # dÃ©sactivation des boutons
    .boutons.first configure -state disabled
    .boutons.prec  configure -state disabled
    .boutons.next  configure -state disabled
@@ -196,10 +196,10 @@ proc enable_navig {} {
 }
 
 # -----------------------------------------------------------------------
-# Fonctions qui gèrent l'état du bouton de calcul
+# Fonctions qui gÃ¨rent l'Ã©tat du bouton de calcul
 # -----------------------------------------------------------------------
 #proc disable_calcul {} {
-#   # désactivation des boutons
+#   # dÃ©sactivation des boutons
 #   .boutons.calculer configure -state disabled
 #}
 
@@ -211,11 +211,11 @@ proc enable_navig {} {
 #proc check_enable {} {
 #   global gate
 #   if {([llength $gate] > 0)} {
-#      #ok il y a un circuit chargé, on peut activer la command calcul
+#      #ok il y a un circuit chargÃ©, on peut activer la command calcul
 #      enable_calcul
 #   }
 #}
 
 
-# ---------------------------------- fin de la déclaration de l'interface
+# ---------------------------------- fin de la dÃ©claration de l'interface
 

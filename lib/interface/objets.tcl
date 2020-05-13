@@ -23,7 +23,7 @@ proc get_object_type { objet } {
 }
 
 # ------------------------------------------------------------
-# Dessine les entrÈs du circuit
+# Dessine les entr√©s du circuit
 # ------------------------------------------------------------
 
 proc CreateInputs {liste_entrees} {
@@ -43,12 +43,12 @@ proc CreateInputs {liste_entrees} {
 
 
 # ------------------------------------------------------------
-# DÈtruit les entrÈes
+# D√©truit les entr√©es
 # ------------------------------------------------------------
 proc DeleteInputs {} {
    global c inputf
    if {([llength $inputf]>0)} {
-      #il y a des entrÈes, on peut les dÈtruire
+      #il y a des entr√©es, on peut les d√©truire
       $c delete entree 
       set inputf {}
    }
@@ -61,7 +61,7 @@ proc DeleteInputs {} {
 
 
 # ------------------------------------------------------------
-# DÈtruit une sortie du circuit
+# D√©truit une sortie du circuit
 # ------------------------------------------------------------
 proc DestroySortie { out } {
     global c outputf
@@ -69,10 +69,10 @@ proc DestroySortie { out } {
     set pos [lsearch $outputf $out]
         
     if {($pos!=(-1))} {
-       #supprime les ÈlÈments caractÈrisant la sortie
+       #supprime les √©l√©ments caract√©risant la sortie
        set outputf [lreplace $outputf $pos $pos]
     
-       #on enlËve l'objet du canvas
+       #on enl√®ve l'objet du canvas
        $c delete $out
     }
 
@@ -83,7 +83,7 @@ proc DestroySortie { out } {
 
 
 # ------------------------------------------------------------
-# RÈcupËre la position d'une sortie
+# R√©cup√®re la position d'une sortie
 # ------------------------------------------------------------
 proc GetSortiePos { out } {
    global c
@@ -102,7 +102,7 @@ proc GetSortiePos { out } {
 
 
 # ------------------------------------------------------------
-# DÈssine les sorties du circuit
+# D√©ssine les sorties du circuit
 # ------------------------------------------------------------
 proc CreateOutputs { lsorties xx } {
     global c outputf
@@ -128,7 +128,7 @@ proc CreateOutputs { lsorties xx } {
     foreach nom $lsorties {
 
        if { ([lsearch $outputf $nom]==(-1)) } {
-           #la sortie n'existe pas, on peut la crÈer
+           #la sortie n'existe pas, on peut la cr√©er
 
            $c addtag $nom withtag [$c create polygon [expr $x-$xwidth] [expr $y-$ywidth] \
                                                      [expr $x+$xwidth] [expr $y-$ywidth] \
@@ -144,7 +144,7 @@ proc CreateOutputs { lsorties xx } {
                                                    [expr $x-$xwidth-$sizenode] $y \
                                                    -fill black]
 
-           #mÈmorise dans la liste des sorties du circuit        
+           #m√©morise dans la liste des sorties du circuit        
            lappend outputf $nom
            incr y 150
        }
@@ -157,12 +157,12 @@ proc CreateOutputs { lsorties xx } {
 # -----------------------------------------  les portes --------------------------------------------------
 
 # ------------------------------------------------------------
-# crÈation d'une porte
+# cr√©ation d'une porte
 # ------------------------------------------------------------
 proc CreateGate {name type entrees sorties xx yy} {
     global c gate
     if { (($xx == "") || ($yy == "")) } {
-       #on place la porte au milieu de l'Ècran
+       #on place la porte au milieu de l'√©cran
        set x 350
        set y 400
     } else {
@@ -171,10 +171,10 @@ proc CreateGate {name type entrees sorties xx yy} {
     }
 
     if ([lsearch $gate $name]==(-1)) {
-      #ok la porte n'existe pas, on peut la crÈer
+      #ok la porte n'existe pas, on peut la cr√©er
       DrawGate $name $type $entrees $sorties $x $y
     } else {
-      #la porte existe dÈj‡, on la remplace
+      #la porte existe d√©j√†, on la remplace
       set coord [GetGatePos $name]
       DestroyGate $name
       DrawGate $name $type $entrees $sorties [lindex $coord 0] [lindex $coord 1]
@@ -186,7 +186,7 @@ proc CreateGate {name type entrees sorties xx yy} {
 }
 
 # ------------------------------------------------------------
-# RÈcupËre la position d'une porte
+# R√©cup√®re la position d'une porte
 # ------------------------------------------------------------
 proc GetGatePos { gate } {
    global c
@@ -205,7 +205,7 @@ proc GetGatePos { gate } {
 
 
 # ------------------------------------------------------------
-# DÈtruit une porte
+# D√©truit une porte
 # ------------------------------------------------------------
 proc DestroyGate { porte } {
     global c gate ins outs types
@@ -213,12 +213,12 @@ proc DestroyGate { porte } {
     set pos [lsearch $gate $porte]
     
     if {($pos!=(-1))} {
-       #supprime les ÈlÈments caractÈrisant la porte
+       #supprime les √©l√©ments caract√©risant la porte
        set gate  [lreplace $gate  $pos $pos]
        set ins   [lreplace $ins   $pos $pos]
        set outs  [lreplace $outs  $pos $pos]
        set types [lreplace $types $pos $pos]    
-       #on enlËve l'objet du canvas
+       #on enl√®ve l'objet du canvas
        $c delete $porte
 
        #redessine les routes
@@ -227,13 +227,13 @@ proc DestroyGate { porte } {
 }
 
 # ------------------------------------------------------------
-# DÈssine une porte sur le circuit
+# D√©ssine une porte sur le circuit
 # ------------------------------------------------------------
 proc DrawGate {name type entrees sorties x y} {
     global c gate ins outs types
 
     set decal 6
-    #compte le nombre d'entrÈes
+    #compte le nombre d'entr√©es
     set nb_entrees [llength $entrees]
     #calcul la hauteur de la porte
     set ywidth [expr ($nb_entrees+1) * $decal]
@@ -244,7 +244,7 @@ proc DrawGate {name type entrees sorties x y} {
                                                  [expr $x + $xwidth] [expr $y + $ywidth] \
                                                  -outline black -fill white]
     
-    #tracÈ du nom de la porte
+    #trac√© du nom de la porte
     switch $type {
        not { set symbol "1"}
        inv { set symbol "1"}
@@ -260,11 +260,11 @@ proc DrawGate {name type entrees sorties x y} {
 
     $c addtag $name withtag [$c create text $x [expr $y+$ywidth+3] -text $name  -anchor n]
     
-    #ATTENTION: l'odre d'affichage des pattes est trËs important, ne pas le modifier (car il respecte l'ordre 
-    #           respectif des sorties puis des entrÈes (utilisÈ par la suite))
+    #ATTENTION: l'odre d'affichage des pattes est tr√®s important, ne pas le modifier (car il respecte l'ordre 
+    #           respectif des sorties puis des entr√©es (utilis√© par la suite))
     
     
-    #affichage des noms noeuds d'entrÈe
+    #affichage des noms noeuds d'entr√©e
     set posy [expr $y - $ywidth]
     foreach entree $entrees  {
         incr posy [expr 2 * $decal]
@@ -277,7 +277,7 @@ proc DrawGate {name type entrees sorties x y} {
                                             -text [lindex $sorties 0] -anchor sw -fill "#888888"]
 
 
-    #tracÈ de la sortie
+    #trac√© de la sortie
     if {(("$type"=="not") || ("$type"=="nand") || ("$type"=="nor") || ("$type"=="inv") || ("$type"=="xnor"))} {
       #on affiche l'inversion de la sortie
       $c addtag $name withtag [$c create oval [expr $x+$xwidth] [expr $y-$sizenode/2] \
@@ -291,7 +291,7 @@ proc DrawGate {name type entrees sorties x y} {
                               [expr $x+$xwidth+$sizenode*2] $y -fill black]
     }
     
-    #tracÈ des entrÈes
+    #trac√© des entr√©es
     set posy [expr $y - $ywidth]
     foreach entree $entrees  {
         incr posy [expr 2 * $decal]
@@ -299,7 +299,7 @@ proc DrawGate {name type entrees sorties x y} {
                                                 [expr $x-$xwidth-$sizenode*2] $posy -fill black]
     }
 
-    #correction de l'espace insÈrÈ par prolog
+    #correction de l'espace ins√©r√© par prolog
     set my_entrees {}
     foreach tmp $entrees {
        lappend my_entrees $tmp
@@ -309,7 +309,7 @@ proc DrawGate {name type entrees sorties x y} {
        lappend my_sorties $tmp
     }
 
-    #on mÈmorise les infos
+    #on m√©morise les infos
     lappend gate  $name
     lappend ins   $my_entrees
     lappend outs  $my_sorties
@@ -319,7 +319,7 @@ proc DrawGate {name type entrees sorties x y} {
 }
 
 # ------------------------------------------------------------
-# DÈssine une route sur le circuit
+# D√©ssine une route sur le circuit
 # ------------------------------------------------------------
 proc wire { gate1 gate2 node } {
    global c ins outs gate inputf outputf wires
@@ -355,14 +355,14 @@ proc draw_line { node x1 y1 x2 y2 } {
    }
    
    
-   #tracÈ des points de jointure
+   #trac√© des points de jointure
    $c addtag $name withtag [$c create oval [expr $x1-$radius] [expr $y1-$radius] \
                                            [expr $x1+$radius] [expr $y1+$radius] \
                                            -fill $color -outline $color]
    $c addtag $name withtag [$c create oval [expr $x2-$radius] [expr $y2-$radius] \
                                            [expr $x2+$radius] [expr $y2+$radius] \
                                            -fill $color -outline $color]
-   #passe la ligne en dessous de la premiËre porte
+   #passe la ligne en dessous de la premi√®re porte
    $c lower $name [lindex [$c find withtag [lindex $gate 0]] 0]
    
    lappend wires $name

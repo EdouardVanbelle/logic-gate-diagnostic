@@ -6,8 +6,8 @@
 %%
 %%
 %%
-%%     Corps principal du projet (effectue la totalité des
-%%     opérations)
+%%     Corps principal du projet (effectue la totalitÃ© des
+%%     opÃ©rations)
 %%
 %%      
 
@@ -17,7 +17,7 @@
 % -----------------------------------------------------------------------------
 
 %diag :-
-%     %exemple sur le fichier par défaut.
+%     %exemple sur le fichier par dÃ©faut.
 %     diag('circuits/default.cir').
 
 

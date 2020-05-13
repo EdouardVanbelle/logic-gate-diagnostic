@@ -1,22 +1,22 @@
 # --------------------------------------------------------------
-# Gestion des boîtes de dialogues
+# Gestion des boÃ®tes de dialogues
 # --------------------------------------------------------------
 
 # --------------------------------------------------------------
-# Fenêtre à propos
+# FenÃªtre Ã  propos
 # --------------------------------------------------------------
 proc apropos {} {   
    tk_messageBox -title "A propos" -icon info -type ok -parent . -message \
 "      Diagnostic\n\n\
 Version Alpha\n\n\
 auteurs:\n\
-   Pérard Lionel <p44080@isen.fr>\n\
+   PÃ©rard Lionel <p44080@isen.fr>\n\
    Vanbelle Edouard <evanbelle@ifrance.com>"
    
 }
 
 # --------------------------------------------------------------
-# Fenetre de débuggage
+# Fenetre de dÃ©buggage
 # --------------------------------------------------------------
 proc debug {text} {
    tk_messageBox -title "debug" -icon info -message $text -type ok -parent .
@@ -32,7 +32,7 @@ proc erreur {text} {
 
 
 # --------------------------------------------------------------
-# Fenêtre d'ouverture d'un fichier
+# FenÃªtre d'ouverture d'un fichier
 # --------------------------------------------------------------
 proc fileDialog {} {
     global titre
@@ -70,13 +70,13 @@ proc fileDialog {} {
 }
 
 # --------------------------------------------------------------
-# Fenêtre d'enregistrement d'un fichier
+# FenÃªtre d'enregistrement d'un fichier
 # --------------------------------------------------------------
 proc SaveAs {} {
     global last_filename gate inputf outputf obs
     
     if {( ([llength $gate]==0) || ([llength $inputf]==0) || ([llength $outputf]==0) || ([array size obs]==0) )} {
-        erreur "Vous devez créer un circuit complet et définir toutes le observations pour sauvegarder"
+        erreur "Vous devez crÃ©er un circuit complet et dÃ©finir toutes le observations pour sauvegarder"
         return
     }
 
@@ -100,7 +100,7 @@ proc Save {} {
     global last_filename gate inputf outputf obs
 
     if {( ([llength gate]==0) || ([llength inputf]==0) || ([llength outputf]==0) || ([array size obs]==0) )} {
-        erreur "Vous devez créer un circuit complet et définir toutes le observations pour sauvegarder"
+        erreur "Vous devez crÃ©er un circuit complet et dÃ©finir toutes le observations pour sauvegarder"
         return
     }
 
@@ -109,13 +109,13 @@ proc Save {} {
 
 
 # --------------------------------------------------------------
-# Fenêtre de création d'un porte
+# FenÃªtre de crÃ©ation d'un porte
 # --------------------------------------------------------------
   proc EnterGate { name type entrees sorties posx posy } {
 
 	toplevel .topl
 	wm geometry .topl 240x205
-	wm title .topl "Création d'une porte $type"
+	wm title .topl "CrÃ©ation d'une porte $type"
 
 	frame .topl.fdial
 	pack .topl.fdial -fill both
@@ -123,7 +123,7 @@ proc Save {} {
 	label .topl.fdial.nom -text "nom de la porte"
 	entry .topl.fdial.name
 
-	label .topl.fdial.en1 -justify left -text "noms des entrées" 
+	label .topl.fdial.en1 -justify left -text "noms des entrÃ©es" 
         label .topl.fdial.rap1 -justify left -text "syntaxe : e1 e2 e3 e4 e5 etc..."
 	entry .topl.fdial.e1
         
@@ -153,7 +153,7 @@ proc Save {} {
   }
 
 # --------------------------------------------------------------
-# Fenêtre: Suppression d'un élément
+# FenÃªtre: Suppression d'un Ã©lÃ©ment
 # --------------------------------------------------------------
 proc delete_object {} {
    global c gate outputf
@@ -186,7 +186,7 @@ proc delete_object {} {
 
 
 # --------------------------------------------------------------
-# Fenêtre: Débuggage
+# FenÃªtre: DÃ©buggage
 # --------------------------------------------------------------
 proc debug_variable {} {
 
@@ -194,7 +194,7 @@ proc debug_variable {} {
 
 	toplevel .topl
 	wm geometry .topl 200x95
-	wm title .topl "Débuggage"
+	wm title .topl "DÃ©buggage"
 
 	frame .topl.fdial
 	pack  .topl.fdial -fill both
@@ -219,23 +219,23 @@ proc debug_variable {} {
 
 
 # --------------------------------------------------------------
-# Fenêtre: saisie des val des entrées/sorties
+# FenÃªtre: saisie des val des entrÃ©es/sorties
 # --------------------------------------------------------------
 proc obs {} {
 	global obs inputf outputf
 	
 	if  {( ([llength $inputf]<=0 )||([llength $outputf]<=0) )} {
-	    erreur "Vous devez tout d'abord créer des entrées ou sortie(s)."
+	    erreur "Vous devez tout d'abord crÃ©er des entrÃ©es ou sortie(s)."
 	    return
 	} 
 	
 	toplevel .topl
-	wm title .topl "Observation des entrés/sorties"
+	wm title .topl "Observation des entrÃ©s/sorties"
 
 	frame .topl.fin
 	pack .topl.fin -fill x
 
-	label .topl.fin.lbl -text "valeurs des entrées"
+	label .topl.fin.lbl -text "valeurs des entrÃ©es"
 	pack .topl.fin.lbl -side top	
 		foreach in $inputf {
 			label .topl.fin.lb$in -text $in -justify left
@@ -284,7 +284,7 @@ proc obs {} {
 
 
 # --------------------------------------------------------------
-# Fenêtre: saisie des sorties
+# FenÃªtre: saisie des sorties
 # --------------------------------------------------------------
 proc EnterOut {} {
 
@@ -292,7 +292,7 @@ proc EnterOut {} {
 
 	toplevel .topl
 	wm geometry .topl 200x95
-	wm title .topl "Création des sorties du circuit"
+	wm title .topl "CrÃ©ation des sorties du circuit"
 
 	frame .topl.fdial
 	pack .topl.fdial -fill both
@@ -303,7 +303,7 @@ proc EnterOut {} {
 	         
 	pack .topl.fdial.lbl .topl.fdial.syn .topl.fdial.sorties -side top -pady 0
 
-	#on garde les valeurs déjà mémorisées
+	#on garde les valeurs dÃ©jÃ  mÃ©morisÃ©es
         .topl.fdial.sorties insert 0 "$outputf"
 	
 	button .topl.fdial.ok -text "Ok" -width 4 -command {	
@@ -318,19 +318,19 @@ proc EnterOut {} {
 
 
 # --------------------------------------------------------------
-# Fenêtre: saisie des entrées
+# FenÃªtre: saisie des entrÃ©es
 # --------------------------------------------------------------
 proc EnterIn {} {
         global inputf
 
 	toplevel .topl
 	wm geometry .topl 200x95
-	wm title .topl "Création des entrées du circuit"
+	wm title .topl "CrÃ©ation des entrÃ©es du circuit"
 
 	frame .topl.fdial
 	pack .topl.fdial -fill both
 
-	label .topl.fdial.lbl -text "nom des entrés"
+	label .topl.fdial.lbl -text "nom des entrÃ©s"
 	label .topl.fdial.syn -justify left -text "syntaxe : e1 in e2 e3 in1 e4 etc..."
 	entry .topl.fdial.ent
 
@@ -351,10 +351,10 @@ proc EnterIn {} {
 }
 
 # --------------------------------------------------------------
-# Fenêtre pour l'aide
+# FenÃªtre pour l'aide
 # --------------------------------------------------------------
 proc GetHelp { } {
    #open "help/help.html" r
    #toplevel
-   debug "en cours de développement"
+   debug "en cours de dÃ©veloppement"
 }

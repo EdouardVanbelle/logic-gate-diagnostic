@@ -1,5 +1,5 @@
 # ------------------------------------------------------------
-# Gestion des évenements
+# Gestion des Ã©venements
 # ------------------------------------------------------------
 
 #Binds de la souris pour les actions
@@ -22,7 +22,7 @@ $c bind all <Double-Button-1> { edit }
 
 
 # ------------------------------------------------------------
-# Actions associées aux boutons de navigation
+# Actions associÃ©es aux boutons de navigation
 # ------------------------------------------------------------
 proc aff_first {} {
     global state 
@@ -55,7 +55,7 @@ proc aff_last {} {
 }
 
 # ------------------------------------------------------------
-# Actions associées au déplacement du plan de travail
+# Actions associÃ©es au dÃ©placement du plan de travail
 # ------------------------------------------------------------
 proc startPanning {x y} {
   global c
@@ -77,7 +77,7 @@ proc edit {} {
     set objet [current_object]
     switch [get_object_type $objet]  {
        "porte" {
-          #on se trouve sur une porte, on peut ouvrir ses propriétés
+          #on se trouve sur une porte, on peut ouvrir ses propriÃ©tÃ©s
           set pos  [lsearch $gate $objet]
           set in   [lindex $ins $pos]
           set out  [lindex $outs $pos]
@@ -85,7 +85,7 @@ proc edit {} {
           EnterGate $objet $type $in $out 3 3               
        }
        "entree" {
-          #on entre les entrées
+          #on entre les entrÃ©es
           EnterIn
        }
        "sortie" {
@@ -93,7 +93,7 @@ proc edit {} {
           EnterOut
        }
        default {
-          debug "En cours de développement"
+          debug "En cours de dÃ©veloppement"
        }
     }
 }
@@ -101,7 +101,7 @@ proc edit {} {
 
 
 # ------------------------------------------------------------
-# Actions associées au passage de la souris sur une porte
+# Actions associÃ©es au passage de la souris sur une porte
 # ------------------------------------------------------------
 proc is_on {} {
     global c
@@ -120,7 +120,7 @@ proc is_out {} {
 }
 
 # ------------------------------------------------------------
-# Actions associées au déplacement d'une porte
+# Actions associÃ©es au dÃ©placement d'une porte
 # ------------------------------------------------------------
 proc itemStartDrag {x y} {
     global lastX lastY c
@@ -145,13 +145,13 @@ proc itemDrag {x y} {
  }
 
 # ------------------------------------------------------------
-# Action associée à la fermeture de la fenêtre
+# Action associÃ©e Ã  la fermeture de la fenÃªtre
 # ------------------------------------------------------------
 proc quitter {} {
    global interface
 
    set answer [tk_messageBox -title "Quitter..." \
-              -message "Voulez-vous quitter l'application ?\n (pensez à enregistrer votre schéma)"\
+              -message "Voulez-vous quitter l'application ?\n (pensez Ã  enregistrer votre schÃ©ma)"\
               -type yesno -icon question -parent .]
 
    if {("$answer"=="yes")} {
@@ -161,7 +161,7 @@ proc quitter {} {
          prolog_event "exit_main"
       } else {
          #on est en mode autonome (test de l'interface)
-         #on détruit tout (fermeture des fenêtres)
+         #on dÃ©truit tout (fermeture des fenÃªtres)
          destroy .
       }
    }

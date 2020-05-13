@@ -1,14 +1,14 @@
 # -------------------------------------------------------
-# Chargement des différents fichiers
+# Chargement des diffÃ©rents fichiers
 # -------------------------------------------------------
 
-#variable définie par prolog sinon on la définie pour les tests
+#variable dÃ©finie par prolog sinon on la dÃ©finie pour les tests
 if {([info exist interface] == 0)} {
    set interface .
 }
 
 
-#déclaration de l'interface
+#dÃ©claration de l'interface
 source "$interface/interface.tcl"
 source "$interface/objets.tcl"
 source "$interface/dialog.tcl"
@@ -46,13 +46,13 @@ set nb_obs 1
 array set batch_obs {}
 
 
-#par défaut, ne calcul que les candidats minimaux
+#par dÃ©faut, ne calcul que les candidats minimaux
 set minimaux "minimaux"
 
-#par défaut on trace les routes
+#par dÃ©faut on trace les routes
 set routes 1
 
-#fichier de travail (pour les négociations avec prolog)
+#fichier de travail (pour les nÃ©gociations avec prolog)
 set working_file "current.cir"
 
 # exemple

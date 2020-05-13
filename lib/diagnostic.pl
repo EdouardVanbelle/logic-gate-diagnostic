@@ -6,25 +6,25 @@
 %%
 %%
 %%  Partie principale du projet:
-%%    - complète les observation
-%%    - génère les équations
-%%    - sélectionne les NOGOODS et NOGOODS minimaux
+%%    - complÃ¨te les observation
+%%    - gÃ©nÃ¨re les Ã©quations
+%%    - sÃ©lectionne les NOGOODS et NOGOODS minimaux
 %%
 %%
 
 
 % -----------------------------------------------------------------------------
-% récupère les Candidats
+% rÃ©cupÃ¨re les Candidats
 % -----------------------------------------------------------------------------
-% arg1: liste du circuit simplifié
+% arg1: liste du circuit simplifiÃ©
 % arg2: liste des candidats minimaux
-% arg3: liste des noeuds associés avec leur valeur (clé=val)
-% arg4: liste des composants associés à leur valeur (clé=val)
+% arg3: liste des noeuds associÃ©s avec leur valeur (clÃ©=val)
+% arg4: liste des composants associÃ©s Ã  leur valeur (clÃ©=val)
 
 
 %diagnostic minimal
 diagnostic( SIMPLECIR, L_CANDIDATS, HASH_NODES, HASH_COMPS, minimaux) :-
-     %récupère la liste des nogoods
+     %rÃ©cupÃ¨re la liste des nogoods
      get_all_nogoods( SIMPLECIR, L_NOGOOD, HASH_NODES, HASH_COMPS),
 
      nl,write('Mode minimal: '), nl,
@@ -34,7 +34,7 @@ diagnostic( SIMPLECIR, L_CANDIDATS, HASH_NODES, HASH_COMPS, minimaux) :-
 
      nl, write( '   Liste des NOGOODS minimaux: '), write( L_NOGOOD_MIN), nl,     
 
-     %récupère les candidats à partir des nogoods
+     %rÃ©cupÃ¨re les candidats Ã  partir des nogoods
      candidats( L_NOGOOD_MIN, L_CANDIDATS),
 
      nl, write( '   Liste des CANDIDATS: '), write( L_CANDIDATS), nl.
@@ -42,7 +42,7 @@ diagnostic( SIMPLECIR, L_CANDIDATS, HASH_NODES, HASH_COMPS, minimaux) :-
 
 %diagnostic complet
 diagnostic( SIMPLECIR, L_CANDIDATS, HASH_NODES, HASH_COMPS, all) :-
-     %récupère la liste des nogoods
+     %rÃ©cupÃ¨re la liste des nogoods
      get_all_nogoods( SIMPLECIR, L_NOGOOD, HASH_NODES, HASH_COMPS),
 
      nl,write('Mode complet: '),nl,        
@@ -50,7 +50,7 @@ diagnostic( SIMPLECIR, L_CANDIDATS, HASH_NODES, HASH_COMPS, all) :-
 
      nl, write( '   Liste des NOGOODS: '), write( L_NOGOOD), nl,     
 
-     %récupère les candidats à partir des nogoods
+     %rÃ©cupÃ¨re les candidats Ã  partir des nogoods
      candidats( L_NOGOOD, L_CANDIDATS),
 
      nl, write( '   Liste des CANDIDATS: '), write( L_CANDIDATS), nl.
@@ -58,14 +58,14 @@ diagnostic( SIMPLECIR, L_CANDIDATS, HASH_NODES, HASH_COMPS, all) :-
 
 
 
-%récupère la liste des nogoods
+%rÃ©cupÃ¨re la liste des nogoods
 get_all_nogoods( SIMPLECIR, L_NOGOOD, HASH_NODES, HASH_COMPS) :-
-     %génération des equations     
+     %gÃ©nÃ©ration des equations     
      gen_equations( SIMPLECIR, EQU, HASH_NODES, HASH_COMPS),
 
      nl, write( 'Equations: '), write( EQU), nl,
 
-     %récupère tous les nogoods
+     %rÃ©cupÃ¨re tous les nogoods
      findall( NOGOOD,    
               (select( HASH_COMPS, NOGOOD),\+EQU), 
               L_NOGOOD).
@@ -73,24 +73,24 @@ get_all_nogoods( SIMPLECIR, L_NOGOOD, HASH_NODES, HASH_COMPS) :-
      
 
 % -----------------------------------------------------------------------------
-% créé le système d'équations
+% crÃ©Ã© le systÃ¨me d'Ã©quations
 % -----------------------------------------------------------------------------
-% arg1: liste du circuit simplifié
-% arg2: liste des équations
-% arg3: liste des noeuds associés avec leur valeur (clé=val)
-% arg4: liste des composants associés à leur valeur (clé=val)
+% arg1: liste du circuit simplifiÃ©
+% arg2: liste des Ã©quations
+% arg3: liste des noeuds associÃ©s avec leur valeur (clÃ©=val)
+% arg4: liste des composants associÃ©s Ã  leur valeur (clÃ©=val)
 
 %dernier appel
 gen_equations( [GATE], FIRST_EQU, HASH_NODES, HASH_COMPS) :-
      gen_une_equation(GATE, FIRST_EQU, HASH_NODES, HASH_COMPS).
 
-%boucle récursive
+%boucle rÃ©cursive
 gen_equations( [GATE|SIMPLECIR], (EQU1,NEXT_EQU), HASH_NODES, HASH_COMPS) :-
 
-     %génère l'équation
+     %gÃ©nÃ¨re l'Ã©quation
      gen_une_equation( GATE, EQU1, HASH_NODES, HASH_COMPS),
      
-     %appel récursif
+     %appel rÃ©cursif
      gen_equations( SIMPLECIR, NEXT_EQU, HASH_NODES, HASH_COMPS).
      
      
@@ -101,13 +101,13 @@ gen_une_equation( [KEY_NAME, TYPE, KEY_IN, KEY_OUT], EQU, HASH_NODES, HASH_COMPS
      key_to_val( KEY_OUT, HASH_NODES,[VAL_OUT]),
      key_to_val( [KEY_NAME], HASH_COMPS, [VAL_NAME]),
      
-     %récupère l'équation de la porte
+     %rÃ©cupÃ¨re l'Ã©quation de la porte
      porte( TYPE, VAL_IN, GATE_EQU),
      
-     %génère l'équation:
+     %gÃ©nÃ¨re l'Ã©quation:
      %% d'un point de vue logique:
      %% VAL_NAME => VAL_OUT #= GATE_EQU
-     %% est équivalent à
+     %% est Ã©quivalent Ã 
      %% (not VAL_NAME) or (GATE_EQU xnor VAL_OUT)
      EQU=( clpb:sat(  VAL_NAME=<((GATE_EQU)=:=VAL_OUT)  ) ).
 
@@ -115,17 +115,17 @@ gen_une_equation( [KEY_NAME, TYPE, KEY_IN, KEY_OUT], EQU, HASH_NODES, HASH_COMPS
 
 
 % -----------------------------------------------------------------------------
-% selection des différents éléments (NOGOODS)
+% selection des diffÃ©rents Ã©lÃ©ments (NOGOODS)
 % -----------------------------------------------------------------------------
-% arg1: liste des clés des composants associées à leurs valeurs
-% arg2: listes des composants "NOGOOD" (clé)
+% arg1: liste des clÃ©s des composants associÃ©es Ã  leurs valeurs
+% arg2: listes des composants "NOGOOD" (clÃ©)
 
 select( [], []).
-%cas où il ne faut pas mémoriser la porte
+%cas oÃ¹ il ne faut pas mÃ©moriser la porte
 select( [_=0|NEXTHASH_COMPS], NOGOOD) :-
      select( NEXTHASH_COMPS, NOGOOD).
      
-%cas où il faut mémoriser la porte
+%cas oÃ¹ il faut mÃ©moriser la porte
 select( [NOM=1|NEXTHASH_COMPS], [NOM|NEXTNOGOOD]) :-
      select( NEXTHASH_COMPS, NEXTNOGOOD).
 
@@ -147,7 +147,7 @@ all_nogoods_minim( NOGOODS, LNOGOODS_MIN):-
             ).
 
 
-%méthode utilisée: on recherche un élément qui n'a pas de sous-ensemble
+%mÃ©thode utilisÃ©e: on recherche un Ã©lÃ©ment qui n'a pas de sous-ensemble
 nogood_minimal( ALLNOGOODS, MINIMAL) :-
      %on cherche un membre des NOGOODS
      member( MINIMAL, ALLNOGOODS),
@@ -156,20 +156,20 @@ nogood_minimal( ALLNOGOODS, MINIMAL) :-
      \+has_subset( MINIMAL, ALLNOGOODS).
      
      
-%renvoie vrai si un NOGOOD à un sous-ensemble NOGOOD
+%renvoie vrai si un NOGOOD Ã  un sous-ensemble NOGOOD
 has_subset( NOGOOD, ALLNOGOODS) :-
      %on effectue tous un test sur tous les autres NOGOODS de la liste
      member( MEMBRE, ALLNOGOODS),
      
-     %sauf sue lui même
+     %sauf sue lui mÃªme
      MEMBRE \== NOGOOD,
      
-     %plus besoin de continuer, on à trouvé un sous-ensemble
+     %plus besoin de continuer, on Ã  trouvÃ© un sous-ensemble
      ord_subset( MEMBRE, NOGOOD).
 
 
 
-%%% méthode obsolète et inachevée donc inutilisée.
+%%% mÃ©thode obsolÃ¨te et inachevÃ©e donc inutilisÃ©e.
 %%%condition initiale: la liste des NOGOODS MINIMAUX = liste des NOGOODS
 %%nogoods_minimaux(_,[],1).
 %%nogoods_minimaux(INPUT,[PETIT|NEW_NOGOODS_MIN],PASSAGE) :-
@@ -181,7 +181,7 @@ has_subset( NOGOOD, ALLNOGOODS) :-
 %%     %recomence avec
 %%     nogoods_minimaux(,OLD_GOODS_MIN,OLDPASSAGE).
 %%
-%%%enlève les sur-ensembles à un nogood
+%%%enlÃ¨ve les sur-ensembles Ã  un nogood
 %%remove_all_supset(_,[],[]).     
 %%remove_all_supset(PETIT,[NOGOOD|NOGOODS_MIN],NEW_NOGOODS_MIN) :-
 %%     (
@@ -191,6 +191,6 @@ has_subset( NOGOOD, ALLNOGOODS) :-
 %%      %on garde le nogood
 %%      NEW_NOGOODS_MIN=[NOGOOD|OLD_NOGOODS_MIN]
 %%     ),
-%%     %passe à l'élément suivant
+%%     %passe Ã  l'Ã©lÃ©ment suivant
 %%     remove_all_supset(PETIT, NOGOODS_MIN, OLD_NOGOODS_MIN).
 

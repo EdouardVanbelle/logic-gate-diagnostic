@@ -1,29 +1,29 @@
 
 
 # --------------------------------------------------------------
-# Fenêtre: saisie des val des entrées/sorties en mode batch
+# FenÃªtre: saisie des val des entrÃ©es/sorties en mode batch
 # --------------------------------------------------------------
 proc batch {} {
    global obs inputf outputf
 	
    if  {( ([llength $inputf]<=0 ) || ([llength $outputf]<=0) )} {
-      erreur "Vous devez tout d'abord créer des entrées ou sortie(s)."
+      erreur "Vous devez tout d'abord crÃ©er des entrÃ©es ou sortie(s)."
       return
    } 
 	
    toplevel .topl
-   wm title .topl "Observation des entrés/sorties"
+   wm title .topl "Observation des entrÃ©s/sorties"
 
    frame .topl.info
-      label .topl.info.txt -text "Cette fenêtre vous permet de rentrer plusieurs observations pour avoir un meilleur\
-                                  diagnostic de votre schéma\n\n\
-                                  Si vous choisissez de tout diagnostiquer, un travaill par élimination sera effectué\
+      label .topl.info.txt -text "Cette fenÃªtre vous permet de rentrer plusieurs observations pour avoir un meilleur\
+                                  diagnostic de votre schÃ©ma\n\n\
+                                  Si vous choisissez de tout diagnostiquer, un travaill par Ã©limination sera effectuÃ©\
                                   et vous aurez les portes valides en vert."
       pack .topl.info.txt
       pack .topl.info -fill x
       
    frame .topl.boutons
-      label  .topl.boutons.fiche -text "Observation n°"
+      label  .topl.boutons.fiche -text "Observation nÂ°"
       button .topl.boutons.first -image dart_left_end    -height 21 -width 21 -command { get_values; first_obs }
       button .topl.boutons.prec  -image dart_left        -height 21 -width 21 -command { get_values; prec_obs }
       label  .topl.boutons.obs   -text " "               -height 2  -width  8 -relief groove           
@@ -42,7 +42,7 @@ proc batch {} {
 
    frame .topl.fin
       pack  .topl.fin -fill x
-      label .topl.fin.lbl -text "valeurs des entrées"
+      label .topl.fin.lbl -text "valeurs des entrÃ©es"
       pack  .topl.fin.lbl -side top
       foreach in $inputf {
          label .topl.fin.lb$in -text $in -justify left
@@ -76,17 +76,17 @@ proc batch {} {
    set_values
 }
 
-#pour le hashage de batch_obs on prend comme clé: noeud@current_obs
+#pour le hashage de batch_obs on prend comme clÃ©: noeud@current_obs
 
 
 # ----------------------------------------------------------------------
-# récupère les obs standard pour les mémoriser sur la fiche courrante
+# rÃ©cupÃ¨re les obs standard pour les mÃ©moriser sur la fiche courrante
 # ----------------------------------------------------------------------
 proc get_from_standard {} {
    global batch_obs inputf outputf obs current_obs
    foreach node $inputf {
       set liste {}
-      #clé
+      #clÃ©
       lappend liste "$node@$current_obs"
       #valeur
       lappend liste [lindex [array get obs $node] 1]
@@ -95,7 +95,7 @@ proc get_from_standard {} {
    }
    foreach node $outputf {
       set liste {}
-      #clé
+      #clÃ©
       lappend liste "$node@$current_obs"
       #valeur
       lappend liste [lindex [array get obs $node] 1]
@@ -105,13 +105,13 @@ proc get_from_standard {} {
 }
 
 # ----------------------------------------------------------------------
-# récupère les obs de la fiche courrante et les passe en standard
+# rÃ©cupÃ¨re les obs de la fiche courrante et les passe en standard
 # ----------------------------------------------------------------------
 proc set_to_standard {} {
    global batch_obs inputf outputf obs current_obs
    foreach node $inputf {
       set liste {}
-      #clé
+      #clÃ©
       lappend liste $node
       #valeur
       lappend liste [lindex [array get batch_obs "$node@$current_obs"] 1]
@@ -120,7 +120,7 @@ proc set_to_standard {} {
    }
    foreach node $outputf {
       set liste {}
-      #clé
+      #clÃ©
       lappend liste $node
       #valeur
       lappend liste [lindex [array get batch_obs "$node@$current_obs"] 1]
@@ -130,17 +130,17 @@ proc set_to_standard {} {
 }
 
 # ----------------------------------------------------------------------
-# affiche les observations courrantes dans la fenêtre de saisie
+# affiche les observations courrantes dans la fenÃªtre de saisie
 # ----------------------------------------------------------------------
 proc set_values {} {
    global batch_obs inputf outputf current_obs
    
    if {([array size batch_obs]==0)} {
-      #le tableau n'existe pas, on le créé depuis les observations d'origine
+      #le tableau n'existe pas, on le crÃ©Ã© depuis les observations d'origine
       get_from_standard
    }
 
-   #assigne les obs d'une fiche à la fenêtre de saisie
+   #assigne les obs d'une fiche Ã  la fenÃªtre de saisie
    foreach node $inputf {
       .topl.fin.en$node  delete 0
       .topl.fin.en$node  insert 0 [lindex [array get batch_obs "$node@$current_obs"] 1]
@@ -170,13 +170,13 @@ proc copy_fiche { source dest } {
 }
 
 # ----------------------------------------------------------------------
-# récupère les saisies de la fenêtre et les mémorise
+# rÃ©cupÃ¨re les saisies de la fenÃªtre et les mÃ©morise
 # ----------------------------------------------------------------------
 proc get_values {} {
    global batch_obs inputf outputf obs current_obs
    foreach node $inputf {
       set liste {}
-      #clé
+      #clÃ©
       lappend liste "$node@$current_obs"
       #valeur
       lappend liste [.topl.fin.en$node get]
@@ -185,7 +185,7 @@ proc get_values {} {
    }
    foreach node $outputf {
       set liste {}
-      #clé
+      #clÃ©
       lappend liste "$node@$current_obs"
       #valeur
       lappend liste [.topl.fout.en$node get]
@@ -196,7 +196,7 @@ proc get_values {} {
 }
 
 # ----------------------------------------------------------------------
-# redessine le numéro de la fiche et actualise les saisies
+# redessine le numÃ©ro de la fiche et actualise les saisies
 # ----------------------------------------------------------------------
 proc redraw_obs {} {
     global current_obs nb_obs
@@ -228,7 +228,7 @@ proc add_obs {} {
 
 
 # ----------------------------------------------------------------------
-# détruit toutes le fiches sauf la courrante
+# dÃ©truit toutes le fiches sauf la courrante
 # ----------------------------------------------------------------------
 proc dela_obs {} {
     global current_obs nb_obs
@@ -241,7 +241,7 @@ proc dela_obs {} {
 
 
 # ----------------------------------------------------------------------
-# Détruit la fiche courrante
+# DÃ©truit la fiche courrante
 # ----------------------------------------------------------------------
 proc del_obs {} {
     global current_obs nb_obs
@@ -268,7 +268,7 @@ proc first_obs {} {
 }
 
 # ----------------------------------------------------------------------
-# va à la fiche précédente
+# va Ã  la fiche prÃ©cÃ©dente
 # ----------------------------------------------------------------------
 proc prec_obs {} {
     global current_obs nb_obs
@@ -280,7 +280,7 @@ proc prec_obs {} {
 }
 
 # ----------------------------------------------------------------------
-# va à fiche suivante
+# va Ã  fiche suivante
 # ----------------------------------------------------------------------
 proc next_obs {} {
     global current_obs nb_obs
@@ -293,7 +293,7 @@ proc next_obs {} {
 
 
 # ----------------------------------------------------------------------
-# va à la dernière fiche
+# va Ã  la derniÃ¨re fiche
 # ----------------------------------------------------------------------
 proc last_obs {} {
     global current_obs nb_obs
@@ -313,7 +313,7 @@ proc calc1 {} {
 
 
 # ----------------------------------------------------------------------
-# Redessine le numéro du calcul en cours
+# Redessine le numÃ©ro du calcul en cours
 # ----------------------------------------------------------------------
 proc redraw_progression {} {
     global current_obs nb_obs
@@ -348,8 +348,8 @@ proc calc_tout {} {
    set cumul_all_candidats {}
 
    
-   # ne pas oublier que les événements sont dans une fifo
-   #demande au prolog de lancer les résultats (ainsi on attent qu'il ait fini tous ces calculs)
+   # ne pas oublier que les Ã©vÃ©nements sont dans une fifo
+   #demande au prolog de lancer les rÃ©sultats (ainsi on attent qu'il ait fini tous ces calculs)
    prolog_event "finishcalctout"
 
    
@@ -360,14 +360,14 @@ proc calc_tout {} {
       #vide tous les candidats
       set all_candidats {}
    
-      #mémorise le circuit (sauvgarde)
+      #mÃ©morise le circuit (sauvgarde)
       CreateFile "$working_file"
    
-      # !!!  on utilise une fifo pour les événements (donc tout est inversé)
+      # !!!  on utilise une fifo pour les Ã©vÃ©nements (donc tout est inversÃ©)
    
       #effectue le diagnostique (complet ou minimal)
       prolog_event "diag($minimaux)"
-      #charge le circuit dans l'interpréteur prolog
+      #charge le circuit dans l'interprÃ©teur prolog
       prolog_event "charge('$working_file')"       
       #demande au prolog de vider la variables globales
       prolog_event "clean_dyna"
@@ -378,30 +378,30 @@ proc calc_tout {} {
 
 
 # ----------------------------------------------------------------------
-#fin de la procédure calc_tout (appelée par Prolog)
+#fin de la procÃ©dure calc_tout (appelÃ©e par Prolog)
 # ----------------------------------------------------------------------
 proc calc_tout_end {} {
    global goods last_obs current_obs cumul_all_candidats goods gate
   
-   #on recherche les éléments qui sont corrects et on les marque
+   #on recherche les Ã©lÃ©ments qui sont corrects et on les marque
     set defectueux {}
     foreach candidat $cumul_all_candidats {
           set defectueux [concat $defectueux $candidat]
 
     }
-    #on recherche les éléments qui sont corrects et on les marque
+    #on recherche les Ã©lÃ©ments qui sont corrects et on les marque
     foreach porte $gate {
        if { ([lsearch $defectueux $porte]==(-1)) } {
           #la porte n'est pas deffectueuse
           if {([lsearch $goods $porte]==-1)} {
-             #on la mémorise car ce n'est pas encore fait
+             #on la mÃ©morise car ce n'est pas encore fait
              lappend goods $porte
           }
        }
     }
   
   
-   #désactive les boutons de navigation
+   #dÃ©sactive les boutons de navigation
    disable_navig
    
    #passe toutes le portes en blanc
@@ -418,7 +418,7 @@ proc calc_tout_end {} {
    
    destroy .topl
    
-   tk_messageBox -title "résultat" -icon info -type ok -parent . \
+   tk_messageBox -title "rÃ©sultat" -icon info -type ok -parent . \
                  -message "Il y a [llength $goods] porte(s) correcte(s) (en vert)" 
 
 }
@@ -427,7 +427,7 @@ proc calc_tout_end {} {
 # sauvegarde les fiches
 # ----------------------------------------------------------------------	 
 proc save_values {} {
-    debug "En cours de développement"
+    debug "En cours de dÃ©veloppement"
     destroy .topl
 }
 
@@ -435,6 +435,6 @@ proc save_values {} {
 # charge les fiches
 # ----------------------------------------------------------------------
 proc load_values {} {
-    debug "En cours de développement"
+    debug "En cours de dÃ©veloppement"
     destroy .topl
 }

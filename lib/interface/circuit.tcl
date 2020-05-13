@@ -1,6 +1,6 @@
 
 # ----------------------------------------------------------------------
-# récupère la position d'un objet
+# rÃ©cupÃ¨re la position d'un objet
 # ----------------------------------------------------------------------
 proc GetPos { objet } {
    global gate outputf 
@@ -10,31 +10,31 @@ proc GetPos { objet } {
    } elseif { ([lsearch $outputf $objet]>=0) } {
       return [GetSortiePos $objet]
    } else {
-      return "Pas de coordonnée pour cette objet"
+      return "Pas de coordonnÃ©e pour cette objet"
    }
 }
 
 
 # ----------------------------------------------------------------------
-# récupère les coordonnées de la patte d'une sortie
+# rÃ©cupÃ¨re les coordonnÃ©es de la patte d'une sortie
 # ----------------------------------------------------------------------
 proc get_coord_sortie { name } {
     global gate ins outs c
         
     set ids [$c find withtag $name]
        
-    #récupère les coordonnées de la patte
+    #rÃ©cupÃ¨re les coordonnÃ©es de la patte
     set coords [$c coords [lindex $ids end]]
     #remarque: utiliser coords au lieu de bbox
     
-    #sélectionne le bon côté de la patte (sortie=droite, entrée=gauche)
+    #sÃ©lectionne le bon cÃ´tÃ© de la patte (sortie=droite, entrÃ©e=gauche)
     lappend retour [lindex $coords 2]   
     lappend retour [lindex $coords 3]
     return $retour
 }
 
 # ----------------------------------------------------------------------
-# récupère les coordonnées d'une patte d'une porte
+# rÃ©cupÃ¨re les coordonnÃ©es d'une patte d'une porte
 # ----------------------------------------------------------------------
 proc get_coord_node { name node } {
     global gate ins outs c
@@ -63,11 +63,11 @@ proc get_coord_node { name node } {
       return {}
     }
     
-    #récupère les coordonnées de la patte
+    #rÃ©cupÃ¨re les coordonnÃ©es de la patte
     set coords [$c coords [lindex $ids $seek]]
     #remarque: utiliser coords au lieu de bbox
     
-    #sélectionne le bon côté de la patte (sortie=droite, entrée=gauche)
+    #sÃ©lectionne le bon cÃ´tÃ© de la patte (sortie=droite, entrÃ©e=gauche)
     lappend retour [lindex $coords 2]   
     lappend retour [lindex $coords 3]
     return $retour
@@ -114,7 +114,7 @@ proc hide_wire {} {
 }
 
 # ----------------------------------------------------------------------
-# on efface tous les éléments
+# on efface tous les Ã©lÃ©ments
 # ----------------------------------------------------------------------
 proc efface {} {
     global c gate all_candidats ins outs titre outputf inputf types goods cumul_all_candidats 
@@ -122,7 +122,7 @@ proc efface {} {
     
     hide_wire
     if ([llength $gate]>0) {
-       #destruction des entrées du circuit
+       #destruction des entrÃ©es du circuit
        $c delete entree
        #destruction des portes
        foreach obj $gate {
@@ -133,7 +133,7 @@ proc efface {} {
           $c delete $obj
        }
        
-       #réinitialise les variables
+       #rÃ©initialise les variables
        set gate {}
        set types {}
        set all_candidats {}
@@ -164,7 +164,7 @@ proc new_calc {} {
    
    
    if  {( ([llength $inputf]<=0 )||([llength $outputf]<=0)||([llength $gate]<=0))} {
-      erreur "Vous devez tout d'abord créer un circuit complet."
+      erreur "Vous devez tout d'abord crÃ©er un circuit complet."
       return
    } 
 
@@ -177,15 +177,15 @@ proc new_calc {} {
    #vide tous les candidats
    set all_candidats {}
    
-   #mémorise le circuit (sauvgarde)
+   #mÃ©morise le circuit (sauvgarde)
    CreateFile "$working_file"
    
-   # !!!  on utilise une fifo pour les événements (donc tout est inversé)
+   # !!!  on utilise une fifo pour les Ã©vÃ©nements (donc tout est inversÃ©)
    
    #effectue le diagnostique (complet ou minimal)
    prolog_event "diag($minimaux)"
 
-   #charge le circuit dans l'interpréteur prolog
+   #charge le circuit dans l'interprÃ©teur prolog
    prolog_event "charge('$working_file')"
        
    #demande au prolog de vider la variables globales
@@ -201,13 +201,13 @@ proc new_calc {} {
 
 
 # ----------------------------------------------------------------------
-# apprentissage des candidats (ajoute la liste des candidats à la suite)
+# apprentissage des candidats (ajoute la liste des candidats Ã  la suite)
 # ----------------------------------------------------------------------
 proc learn_candidats { candidats } {
     global all_candidats cumul_all_candidats 
     lappend all_candidats $candidats
     if {([lsearch $cumul_all_candidats $candidats]==(-1))} {
-       #le candidat n'est pas encore mémorise, on le fait
+       #le candidat n'est pas encore mÃ©morise, on le fait
        lappend cumul_all_candidats $candidats
     }
 }
@@ -223,12 +223,12 @@ proc learn_good {} {
           set defectueux [concat $defectueux $candidat]
 
     }
-    #on recherche les éléments qui sont corrects et on les marque
+    #on recherche les Ã©lÃ©ments qui sont corrects et on les marque
     foreach porte $gate {
        if { ([lsearch $defectueux $porte]==(-1)) } {
           #la porte n'est pas deffectueuse
           if {([lsearch $goods $porte]==-1)} {
-             #on la mémorise car ce n'est pas encore fait
+             #on la mÃ©morise car ce n'est pas encore fait
              lappend goods $porte
           }
        }
@@ -297,13 +297,13 @@ proc show_good_gates {} {
 
 
 # ----------------------------------------------------------------------
-# affiche la couleur de chaque porte en fonction de son état
+# affiche la couleur de chaque porte en fonction de son Ã©tat
 # ----------------------------------------------------------------------
 proc show_state { indice } {
     global all_candidats
     validate_all_gates
 
-    #modifie le label (indique la solution affichée)
+    #modifie le label (indique la solution affichÃ©e)
     .boutons.navig configure -text "[expr $indice+1]/[llength $all_candidats]"
 
     unvalidate_gates [lindex $all_candidats $indice]
@@ -326,7 +326,7 @@ puts $file "cir \["
 set pos 0
 set end [expr [llength $gate]-1]
 foreach porte $gate {
-  #détermine s'il faut ajouter une virgule en fin de ligne
+  #dÃ©termine s'il faut ajouter une virgule en fin de ligne
   if {($pos == $end)} { set sep "" } else { set sep "," }
   set entrees [join [lindex $ins $pos] ", "]
   set sorties [join [lindex $outs $pos] ", "]
@@ -339,7 +339,7 @@ puts $file "input \["
 set pos 0
 set end [expr [llength $inputf]-1]
 foreach in $inputf {
-  #détermine s'il faut ajouter une virgule en fin de ligne
+  #dÃ©termine s'il faut ajouter une virgule en fin de ligne
   if {($pos == $end)} { set sep "" } else { set sep "," }
   puts $file "  $in=[lindex [array get obs $in] 1]$sep"
   incr pos 1
@@ -350,7 +350,7 @@ puts $file "output \["
 set pos 0
 set end [expr [llength $outputf]-1]
 foreach out $outputf {
-  #détermine s'il faut ajouter une virgule en fin de ligne
+  #dÃ©termine s'il faut ajouter une virgule en fin de ligne
   if {($pos == $end)} { set sep "" } else { set sep "," }
   puts $file "  $out=[lindex [array get obs $out] 1]$sep"
   incr pos 1

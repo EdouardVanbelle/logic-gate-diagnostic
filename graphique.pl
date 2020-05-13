@@ -5,14 +5,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %%
-%%  Charge la totalité des fichiers puis lance la partie
+%%  Charge la totalitÃ© des fichiers puis lance la partie
 %%  principale.
 %%
 %%
 
 
 % --------------------------------------------------------------------------------
-% chargement des bibliothèques:
+% chargement des bibliothÃ¨ques:
 % --------------------------------------------------------------------------------
 
 
@@ -22,14 +22,14 @@
 :- use_module(library(clpb)).
 %gestion des candidats
 :- use_module('lib/candidats').
-%gestion des listes ordonnées (ensembles)
+%gestion des listes ordonnÃ©es (ensembles)
 :- use_module(library(ordsets)).
 
 %pour l'interface graphique (tcl/tk)
 :- use_module(library(tcltk)).
 
 
-%permet de charger d'autres fichier (donc de redéfinir le circuit sans warning)
+%permet de charger d'autres fichier (donc de redÃ©finir le circuit sans warning)
 :- prolog_flag(redefine_warnings,_,off).
 
 :- prolog_flag(single_var_warnings,_,on).

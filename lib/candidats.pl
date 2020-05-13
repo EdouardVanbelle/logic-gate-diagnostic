@@ -10,7 +10,7 @@
 %%
 
 
-%déclaration des fonctions visibles (ici une seule)
+%dÃ©claration des fonctions visibles (ici une seule)
 :- module(candidats,[candidats/2]).
 
 :- use_module(library(ordsets)).

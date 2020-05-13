@@ -5,7 +5,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %%
-%%  Contient les fonctions complémentaires:
+%%  Contient les fonctions complÃ©mentaires:
 %%    - gestion de liste cle=val
 %%    - inversion d'un liste
 %%
@@ -14,10 +14,10 @@
 
 
 % -----------------------------------------------------------------------------
-% fait correspondre une variable unique à chaque noeud/comps
+% fait correspondre une variable unique Ã  chaque noeud/comps
 % -----------------------------------------------------------------------------
-% arg1: liste des clés (noeuds/comps)
-% arg2: liste des clés (noeuds/comps) associés à leur valeur
+% arg1: liste des clÃ©s (noeuds/comps)
+% arg2: liste des clÃ©s (noeuds/comps) associÃ©s Ã  leur valeur
 
 make_hash( [], []).
 
@@ -27,11 +27,11 @@ make_hash( [KEY|NEXTKEYS], [KEY=_|NEXTHASH]) :-
 
 
 % -----------------------------------------------------------------------------
-% récupère la variable associée à une liste de noeud/comps
-% association clé<->valeur, comme dans un hashage
+% rÃ©cupÃ¨re la variable associÃ©e Ã  une liste de noeud/comps
+% association clÃ©<->valeur, comme dans un hashage
 % -----------------------------------------------------------------------------
-% arg1: liste des clés dont on recherche la valeur associée
-% arg2: liste des clés associées à leur valeur (cle->val)
+% arg1: liste des clÃ©s dont on recherche la valeur associÃ©e
+% arg2: liste des clÃ©s associÃ©es Ã  leur valeur (cle->val)
 % arg3: liste des valeurs respectives
 
 key_to_val( KEYS, HASH, VALS) :-

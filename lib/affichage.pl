@@ -17,7 +17,7 @@
 
 affichage( CIR, INPUT, OUTPUT, HASH_NODES) :-
 
-     %affichage des entrées
+     %affichage des entrÃ©es
      exec_proc(['CreateInputs','{',INPUT,'}']), 
      
      append( INPUT, OUTPUT, IO),
@@ -25,10 +25,10 @@ affichage( CIR, INPUT, OUTPUT, HASH_NODES) :-
      %apprentissage des observations
      learn_obs( HASH_NODES, IO),
 
-     %classe les clés dans l'ordre alphabétique
+     %classe les clÃ©s dans l'ordre alphabÃ©tique
      list_to_ord_set( INPUT, SORTED_NODES),     
 
-     %récupère le circuit dans l'ordre
+     %rÃ©cupÃ¨re le circuit dans l'ordre
      aff_circuit( CIR, SORTED_NODES, LLGATES),
 
      %retourne la liste
@@ -42,13 +42,13 @@ affichage( CIR, INPUT, OUTPUT, HASH_NODES) :-
      exec_proc(['CreateOutputs','{',OUTPUT,'}',POSX]).
      
 
-%apprentissage des observations à l'interface
+%apprentissage des observations Ã  l'interface
 learn_obs( [], _).
 learn_obs( [CLE=VAL|NEXTHASH], IO) :-
      ( member(CLE, IO) ->  exec_proc(['learn_obs',CLE,VAL]) ; true ),
      learn_obs( NEXTHASH, IO).
 
-%attribue une position relative à la porte
+%attribue une position relative Ã  la porte
 assign_pos([]).
 assign_pos([LGATE|NEXTLLGATES]) :-
      assign_pos1( LGATE, NEXTLLGATES),
@@ -56,7 +56,7 @@ assign_pos([LGATE|NEXTLLGATES]) :-
 
 assign_pos1( [], _).
 assign_pos1( [[NOM,TYPE,IN,OUT]|NEXTLGATES], NEXTLLGATES) :-
-     %récupère le niveau
+     %rÃ©cupÃ¨re le niveau
      length( NEXTLLGATES, POSX),
      length(  NEXTLGATES, POSY),
 
@@ -81,7 +81,7 @@ assign_pos1( [[NOM,TYPE,IN,OUT]|NEXTLGATES], NEXTLLGATES) :-
 aff_circuit( [], _, []).
 aff_circuit( CIR, NODES, [LGATES|NEXTLLGATES]) :-
 
-     %récupère toutes les portes du même niveau
+     %rÃ©cupÃ¨re toutes les portes du mÃªme niveau
      findall(GATE,
              find_one_gate( CIR, NODES, GATE),
              LGATES
@@ -91,10 +91,10 @@ aff_circuit( CIR, NODES, [LGATES|NEXTLLGATES]) :-
      list_to_ord_set(LGATES,SORTED_LGATES),
      list_to_ord_set(CIR,SORTED_CIR),
 
-     %on travaille par la suite le circuit sans les portes qui ont été trouvées
+     %on travaille par la suite le circuit sans les portes qui ont Ã©tÃ© trouvÃ©es
      ord_subtract( SORTED_CIR, SORTED_LGATES, CLEANED_CIR),
 
-     %récupère toutes les sorties du niveau trouvé
+     %rÃ©cupÃ¨re toutes les sorties du niveau trouvÃ©
      outputs_at_level( LGATES, NEWOUT),
 
      %ajoute les noeuds de sorties aux noeuds de recherche
@@ -110,7 +110,7 @@ aff_circuit( CIR, NODES, [LGATES|NEXTLLGATES]) :-
 
 
 
-%récupère une porte qui a toutes ses entrées dans la liste de noeuds
+%rÃ©cupÃ¨re une porte qui a toutes ses entrÃ©es dans la liste de noeuds
 find_one_gate( CIR, NODES, GATE) :-
 
      %on prend une porte du circuit
@@ -118,17 +118,17 @@ find_one_gate( CIR, NODES, GATE) :-
 
      GATE=[_,_,IN,_],     
 
-     %on vérifie si toutes le portes font bien parties des noeuds    
+     %on vÃ©rifie si toutes le portes font bien parties des noeuds    
      ord_subset( IN, NODES).
 
 
 
 
 
-%récupère toutes les sorties du niveau trouvé
+%rÃ©cupÃ¨re toutes les sorties du niveau trouvÃ©
 outputs_at_level( [], []).
 outputs_at_level( [[_,_,_,OUT]|NEXTGATES], NEWOUT) :-
-     %concaténation des 2 listes
+     %concatÃ©nation des 2 listes
      append( OUT, OLDOUT, NEWOUT),
 
      %regarde la porte suivante

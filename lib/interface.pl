@@ -6,12 +6,12 @@
 %%
 %%
 %%
-%%     Corps principal du projet (effectue la totalité des
-%%     opérations)
+%%     Corps principal du projet (effectue la totalitÃ© des
+%%     opÃ©rations)
 %%
 %%      
 
-% ces fonction sont redéfinies à chaque chargement d'un circuit
+% ces fonction sont redÃ©finies Ã  chaque chargement d'un circuit
 %:- dynamic simple_cir, hash_nodes, hash_comps.
 
 :- assert(simple_cir(_)).
@@ -24,7 +24,7 @@
 % programme principal.
 % -----------------------------------------------------------------------------
 %diag :-
-%     %exemple sur le fichier par défaut.
+%     %exemple sur le fichier par dÃ©faut.
 %     diag('circuits/default.cir').
 
 
@@ -33,7 +33,7 @@
 %     %on chage le circuit
 %     interpreteur( FICHIER, SIMPLECIR, INPUT, HASH_NODES, HASH_COMPS),
 %
-%     %demande à l'interpréteur tcl/tk d'afficher le circuit
+%     %demande Ã  l'interprÃ©teur tcl/tk d'afficher le circuit
 %     affichage( SIMPLECIR, INPUT),
 %
 %     %recherche des candidats
@@ -41,10 +41,10 @@
 
 main :-
      %chargement de l'interface tcl/tk
-     tk_new([top_level_events,name('Diagnostic d\'un circuit booléen')],Interp),
+     tk_new([top_level_events,name('Diagnostic d\'un circuit boolÃ©en')],Interp),
      assert(tcl_interpreter(Interp)),
      nl,write('Lancement de l\'interface...'),nl,
-     %précise au prog tcl que l'on travaille depuis prolog
+     %prÃ©cise au prog tcl que l'on travaille depuis prolog
      tcl_eval(Interp,'set interface "lib/interface"', _),
      tcl_eval(Interp,'source $interface/main.tcl', _),
      wait_event(Interp).
@@ -79,21 +79,21 @@ charge( FICHIER) :-
      assert(hash_comps(HASH_COMPS)).
 
 affiche :-
-     %on récupère les variables
+     %on rÃ©cupÃ¨re les variables
      save_input(INPUT),
      save_output(OUTPUT),
      simple_cir(SIMPLE_CIR),
      hash_nodes(HASH_NODES),
       
-     %demande à l'interpréteur tcl/tk d'afficher le circuit
+     %demande Ã  l'interprÃ©teur tcl/tk d'afficher le circuit
      affichage( SIMPLE_CIR, INPUT, OUTPUT, HASH_NODES).
 
 
-%affiche les portes déffectueuses
-%MODE représente s'il ne faut prendre que les nogoods minimaux
+%affiche les portes dÃ©ffectueuses
+%MODE reprÃ©sente s'il ne faut prendre que les nogoods minimaux
 diag(MODE) :-
 
-     %on récupère les variables
+     %on rÃ©cupÃ¨re les variables
      simple_cir(SIMPLE_CIR),
      hash_nodes(HASH_NODES),
      hash_comps(HASH_COMPS),
@@ -101,16 +101,16 @@ diag(MODE) :-
      %recherche des candidats
      diagnostic( SIMPLE_CIR, LCANDIDATS, HASH_NODES, HASH_COMPS, MODE),
 
-     %désactivation du bouton calculer
+     %dÃ©sactivation du bouton calculer
      %exec_proc(['disable_calcul']),
 
-     %on apprend à l'interface tcl, touts les CANDIDATS
+     %on apprend Ã  l'interface tcl, touts les CANDIDATS
      learn( LCANDIDATS),
      
-     %apprend à l'interface les portes qui sont correctes
+     %apprend Ã  l'interface les portes qui sont correctes
      exec_proc( ['learn_good']),
 
-     %affichage de la première solution
+     %affichage de la premiÃ¨re solution
      exec_proc( ['aff_first']),
  
      %activation des boutons de navigation
@@ -133,7 +133,7 @@ clean_dyna :-
      hash_nodes(HASH_NODES),
      hash_comps(HASH_COMPS),
      
-     write('On vide les prédicats...'),nl,
+     write('On vide les prÃ©dicats...'),nl,
      
      %destruction des clauses dynamiques
      retract(save_input(INPUT)),
@@ -158,12 +158,12 @@ exit_main :-
      nl,write('Sortie du programme, veuillez patienter...'),nl,
      tcl_interpreter(Interp),      
   
-     %demande la fermeture des fenêtres tcl
+     %demande la fermeture des fenÃªtres tcl
      tcl_eval(Interp,['destroy .'],_),  
 
-     %plus besoin de l'interpréteur
+     %plus besoin de l'interprÃ©teur
      tcl_delete(Interp),                
-     %détruit la fonction tcl_interpreter
+     %dÃ©truit la fonction tcl_interpreter
      retract(tcl_interpreter(Interp)),  
      %quitte prolog
      halt.                              

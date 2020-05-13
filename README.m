@@ -1,5 +1,0 @@
-
-
-requirements: 
-
-	gprolog tcl tk
